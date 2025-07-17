@@ -1,0 +1,381 @@
+{
+  "folders": [
+    {
+      "name": "🎯 Pet Health Tracker (Frontend)",
+      "path": "./pet_health_tracker"
+    },
+    {
+      "name": "🚀 API Backend (FastAPI)",
+      "path": "./app"
+    },
+    {
+      "name": "📋 Project Root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    // Global workspace settings
+    "files.associations": {
+      "*.dart": "dart",
+      "*.py": "python",
+      "pubspec.yaml": "yaml",
+      "pubspec.lock": "yaml",
+      "analysis_options.yaml": "yaml",
+      "requirements.txt": "plaintext",
+      "docker-compose.yml": "yaml",
+      "Dockerfile": "dockerfile"
+    },
+    
+    // Search and file exclusions
+    "search.exclude": {
+      // Flutter exclusions
+      "**/pet_health_tracker/build": true,
+      "**/pet_health_tracker/.dart_tool": true,
+      "**/pet_health_tracker/android/.gradle": true,
+      "**/pet_health_tracker/ios/Pods": true,
+      "**/pet_health_tracker/ios/.symlinks": true,
+      "**/pet_health_tracker/ios/Flutter/flutter_assets": true,
+      "**/pet_health_tracker/ios/Runner.xcworkspace": true,
+      "**/pet_health_tracker/web/packages": true,
+      
+      // Python/Backend exclusions
+      "**/venv": true,
+      "**/env": true,
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/node_modules": true,
+      
+      // General exclusions
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/tmp": true,
+      "**/coverage": true
+    },
+    
+    // File watchers
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/pet_health_tracker/build/**": true,
+      "**/pet_health_tracker/.dart_tool/**": true,
+      "**/pet_health_tracker/android/.gradle/**": true,
+      "**/pet_health_tracker/ios/Pods/**": true,
+      "**/venv/**": true,
+      "**/__pycache__/**": true
+    },
+    
+    // Flutter settings (when in Flutter files)
+    "dart.flutterSdkPath": null,
+    "dart.previewFlutterUiGuides": true,
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "dart.hotReloadOnSave": "always",
+    "dart.openDevTools": "flutter",
+    
+    // Python settings
+    "python.defaultInterpreterPath": "./venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": true,
+    
+    // Editor settings
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    },
+    "editor.rulers": [80, 120],
+    
+    // Terminal settings
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    
+    // Git settings
+    "git.ignoreLimitWarning": true,
+    "git.repositoryScanMaxDepth": 2,
+    
+    // Auto-save
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    
+    // Multi-root workspace specific
+    "multiCommand.commands": [
+      {
+        "command": "multiCommand.startDevelopment",
+        "sequence": [
+          "workbench.action.terminal.new",
+          {
+            "command": "workbench.action.terminal.sendSequence",
+            "args": {
+              "text": "cd pet_health_tracker && flutter run\n"
+            }
+          },
+          "workbench.action.terminal.new",
+          {
+            "command": "workbench.action.terminal.sendSequence",
+            "args": {
+              "text": "source venv/bin/activate && uvicorn app.main:app --reload\n"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  
+  "extensions": {
+    "recommendations": [
+      // Flutter & Dart
+      "dart-code.dart-code",
+      "dart-code.flutter",
+      "felixangelov.bloc",
+      
+      // Python & FastAPI
+      "ms-python.python",
+      "ms-python.pylint",
+      "ms-python.black-formatter",
+      "ms-python.isort",
+      "ms-toolsai.jupyter",
+      
+      // API Development
+      "humao.rest-client",
+      "rangav.vscode-thunder-client",
+      
+      // Database
+      "mtxr.sqltools",
+      "mtxr.sqltools-driver-pg",
+      
+      // Docker & DevOps
+      "ms-azuretools.vscode-docker",
+      "ms-vscode-remote.remote-containers",
+      
+      // General Development
+      "gruntfuggly.todo-tree",
+      "streetsidesoftware.code-spell-checker",
+      "ms-vscode.vscode-icons",
+      "pkief.material-icon-theme",
+      
+      // Git
+      "mhutchie.git-graph",
+      "eamodio.gitlens",
+      
+      // Markdown
+      "yzhang.markdown-all-in-one",
+      "shd101wyy.markdown-preview-enhanced",
+      
+      // YAML & Config
+      "redhat.vscode-yaml",
+      "ms-vscode.vscode-json"
+    ],
+    "unwantedRecommendations": [
+      "ms-vscode.vscode-typescript"
+    ]
+  },
+  
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🎯 Flutter: Get Packages",
+        "type": "shell",
+        "command": "flutter",
+        "args": ["pub", "get"],
+        "options": {
+          "cwd": "${workspaceFolder}/pet_health_tracker"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🎯 Flutter: Run Debug",
+        "type": "shell",
+        "command": "flutter",
+        "args": ["run", "--debug"],
+        "options": {
+          "cwd": "${workspaceFolder}/pet_health_tracker"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "isBackground": true
+      },
+      {
+        "label": "🎯 Flutter: Test",
+        "type": "shell",
+        "command": "flutter",
+        "args": ["test"],
+        "options": {
+          "cwd": "${workspaceFolder}/pet_health_tracker"
+        },
+        "group": "test",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🎯 Flutter: Analyze",
+        "type": "shell",
+        "command": "flutter",
+        "args": ["analyze"],
+        "options": {
+          "cwd": "${workspaceFolder}/pet_health_tracker"
+        },
+        "group": "test",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🚀 Backend: Start Development Server",
+        "type": "shell",
+        "command": "uvicorn",
+        "args": ["app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+        "options": {
+          "cwd": "${workspaceFolder}",
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "isBackground": true
+      },
+      {
+        "label": "🚀 Backend: Install Dependencies",
+        "type": "shell",
+        "command": "pip",
+        "args": ["install", "-r", "requirements.txt"],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🚀 Backend: Run Tests",
+        "type": "shell",
+        "command": "python",
+        "args": ["-m", "pytest", "-v"],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "group": "test",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🐳 Docker: Build & Start",
+        "type": "shell",
+        "command": "docker-compose",
+        "args": ["up", "--build"],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🐳 Docker: Stop Services",
+        "type": "shell",
+        "command": "docker-compose",
+        "args": ["down"],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🔄 Start Full Development Environment",
+        "dependsOrder": "parallel",
+        "dependsOn": [
+          "🎯 Flutter: Run Debug",
+          "🚀 Backend: Start Development Server"
+        ]
+      }
+    ]
+  },
+  
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "🎯 Flutter: Debug",
+        "type": "dart",
+        "request": "launch",
+        "program": "pet_health_tracker/lib/main.dart",
+        "cwd": "${workspaceFolder}/pet_health_tracker",
+        "flutterMode": "debug",
+        "console": "debugConsole",
+        "args": [
+          "--enable-asserts"
+        ]
+      },
+      {
+        "name": "🎯 Flutter: Debug with Backend",
+        "type": "dart",
+        "request": "launch",
+        "program": "pet_health_tracker/lib/main.dart",
+        "cwd": "${workspaceFolder}/pet_health_tracker",
+        "flutterMode": "debug",
+        "console": "debugConsole",
+        "args": [
+          "--enable-asserts",
+          "--dart-define=API_BASE_URL=http://localhost:8000",
+          "--dart-define=USE_MOCK_API=false"
+        ]
+      },
+      {
+        "name": "🚀 Backend: Debug FastAPI",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/app/main.py",
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+        },
+        "args": []
+      },
+      {
+        "name": "🧪 Backend: Debug Tests",
+        "type": "python",
+        "request": "launch",
+        "module": "pytest",
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal",
+        "args": ["-v"]
+      }
+    ],
+    "compounds": [
+      {
+        "name": "🔄 Debug Full Stack",
+        "configurations": [
+          "🎯 Flutter: Debug with Backend",
+          "🚀 Backend: Debug FastAPI"
+        ]
+      }
+    ]
+  }
+}

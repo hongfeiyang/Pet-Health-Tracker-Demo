@@ -1,0 +1,114 @@
+{
+    "FastAPI Router": {
+        "prefix": "fastapi-router",
+        "body": [
+            "from fastapi import APIRouter, Depends, HTTPException, status",
+            "from sqlalchemy.orm import Session",
+            "from app.core.database import get_db",
+            "from app.core.security import get_current_user",
+            "from app.models.database import User",
+            "",
+            "router = APIRouter(prefix=\"/${1:prefix}\", tags=[\"${2:tag}\"])",
+            "",
+            "@router.get(\"/\")",
+            "def ${3:function_name}(",
+            "    current_user: User = Depends(get_current_user),",
+            "    db: Session = Depends(get_db)",
+            "):",
+            "    ${4:# Implementation}",
+            "    return {\"message\": \"${5:Success}\"}"
+        ],
+        "description": "Create a FastAPI router with common imports"
+    },
+    "Pydantic Model": {
+        "prefix": "pydantic-model",
+        "body": [
+            "from pydantic import BaseModel, field_serializer",
+            "from typing import Optional",
+            "from datetime import datetime",
+            "",
+            "class ${1:ModelName}(BaseModel):",
+            "    ${2:field}: ${3:str}",
+            "    ${4:optional_field}: Optional[${5:str}] = None",
+            "    ",
+            "    class Config:",
+            "        from_attributes = True"
+        ],
+        "description": "Create a Pydantic model"
+    },
+    "SQLAlchemy Model": {
+        "prefix": "sqlalchemy-model",
+        "body": [
+            "from sqlalchemy import Column, String, Integer, DateTime, ForeignKey",
+            "from sqlalchemy.orm import relationship",
+            "from sqlalchemy.sql import func",
+            "from app.models.database import Base",
+            "import uuid",
+            "",
+            "class ${1:ModelName}(Base):",
+            "    __tablename__ = \"${2:table_name}\"",
+            "    ",
+            "    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))",
+            "    ${3:field} = Column(${4:String(255)}, nullable=${5:False})",
+            "    created_at = Column(DateTime(timezone=True), server_default=func.now())",
+            "    ",
+            "    ${6:# Relationships}",
+            "    ${7:# parent = relationship(\"ParentModel\", back_populates=\"children\")}"
+        ],
+        "description": "Create a SQLAlchemy model"
+    },
+    "FastAPI Dependency": {
+        "prefix": "fastapi-dependency",
+        "body": [
+            "def ${1:dependency_name}(",
+            "    ${2:param}: ${3:str},",
+            "    db: Session = Depends(get_db)",
+            "):",
+            "    ${4:# Implementation}",
+            "    ${5:# Validation logic}",
+            "    return ${6:result}"
+        ],
+        "description": "Create a FastAPI dependency function"
+    },
+    "Route with Authentication": {
+        "prefix": "auth-route",
+        "body": [
+            "@router.${1:get}(\"/${2:endpoint}\", response_model=${3:ResponseModel})",
+            "def ${4:function_name}(",
+            "    ${5:# Parameters}",
+            "    current_user: User = Depends(get_current_user),",
+            "    db: Session = Depends(get_db)",
+            "):",
+            "    ${6:# Implementation}",
+            "    ${7:# Business logic}",
+            "    return ${8:response}"
+        ],
+        "description": "Create an authenticated route"
+    },
+    "Error Handler": {
+        "prefix": "error-handler",
+        "body": [
+            "if not ${1:condition}:",
+            "    raise HTTPException(",
+            "        status_code=status.HTTP_${2:404}_${3:NOT_FOUND},",
+            "        detail=\"${4:Resource not found}\"",
+            "    )"
+        ],
+        "description": "Create an HTTP exception handler"
+    },
+    "Database Query": {
+        "prefix": "db-query",
+        "body": [
+            "${1:result} = db.query(${2:Model}).filter(",
+            "    ${2:Model}.${3:field} == ${4:value}",
+            ").${5:first}()",
+            "",
+            "if not ${1:result}:",
+            "    raise HTTPException(",
+            "        status_code=status.HTTP_404_NOT_FOUND,",
+            "        detail=\"${6:Not found}\"",
+            "    )"
+        ],
+        "description": "Create a database query with error handling"
+    }
+}

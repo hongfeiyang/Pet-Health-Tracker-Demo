@@ -1,0 +1,67 @@
+{
+    "recommendations": [
+        // Essential Flutter & Dart Extensions
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        
+        // BLoC Development
+        "felixangelov.bloc",
+        
+        // Python & FastAPI Development
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "ms-python.flake8",
+        "ms-python.mypy-type-checker",
+        "ms-toolsai.jupyter",
+        
+        // API Development & Testing
+        "humao.rest-client",
+        "rangav.vscode-thunder-client",
+        
+        // Database Tools
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
+        
+        // Docker & DevOps
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        
+        // Code Quality & Formatting
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-vscode.makefile-tools",
+        
+        // Version Control
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "donjayamanne.githistory",
+        
+        // Productivity Extensions
+        "gruntfuggly.todo-tree",
+        "streetsidesoftware.code-spell-checker",
+        "ms-vscode.vscode-markdown",
+        
+        // File Management & Icons
+        "ms-vscode.vscode-icons",
+        "pkief.material-icon-theme",
+        
+        // Flutter Specific Tools
+        "nash.awesome-flutter-snippets",
+        "alexisvt.flutter-snippets",
+        "gornivv.vscode-flutter-files",
+        
+        // Markdown & Documentation
+        "yzhang.markdown-all-in-one",
+        "shd101wyy.markdown-preview-enhanced",
+        
+        // Multi-root workspace support
+        "alefragnani.project-manager"
+    ],
+    "unwantedRecommendations": [
+        "ms-python.pylint",
+        "ms-vscode.vscode-typescript",
+        "hookyqr.beautify",
+        "ms-vscode.node-debug2"
+    ]
+}

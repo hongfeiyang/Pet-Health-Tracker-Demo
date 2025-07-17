@@ -1,0 +1,150 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        // Flutter Debug Configurations
+        {
+            "name": "🎯 Flutter: Debug",
+            "type": "dart",
+            "request": "launch",
+            "program": "pet_health_tracker/lib/main.dart",
+            "cwd": "${workspaceFolder}/pet_health_tracker",
+            "flutterMode": "debug",
+            "console": "debugConsole",
+            "args": [
+                "--enable-asserts"
+            ]
+        },
+        {
+            "name": "🎯 Flutter: Debug with Backend",
+            "type": "dart",
+            "request": "launch",
+            "program": "pet_health_tracker/lib/main.dart",
+            "cwd": "${workspaceFolder}/pet_health_tracker",
+            "flutterMode": "debug",
+            "console": "debugConsole",
+            "args": [
+                "--enable-asserts",
+                "--dart-define=API_BASE_URL=http://localhost:8000",
+                "--dart-define=USE_MOCK_API=false"
+            ]
+        },
+        {
+            "name": "🧪 Flutter: Test Debug",
+            "type": "dart",
+            "request": "launch",
+            "program": "pet_health_tracker/test/widget_test.dart",
+            "cwd": "${workspaceFolder}/pet_health_tracker",
+            "flutterMode": "debug",
+            "console": "debugConsole"
+        },
+        // Backend Debug Configurations
+        {
+            "name": "🚀 FastAPI Dev Server",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--reload",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/venv/bin/python"
+        },
+        {
+            "name": "🚀 FastAPI Production Server",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000",
+                "--workers",
+                "1"
+            ],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/venv/bin/python"
+        },
+        {
+            "name": "🔍 Debug FastAPI Server",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--reload",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8000",
+                "--log-level",
+                "debug"
+            ],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/venv/bin/python",
+            "stopOnEntry": false,
+            "debugOptions": [
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "🧪 Run API Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_api.py",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/venv/bin/python"
+        },
+        {
+            "name": "🔍 Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/venv/bin/python"
+        },
+        {
+            "name": "🗃️ Database Shell",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage_db.py",
+            "args": ["shell"],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/venv/bin/python"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "🔄 Debug Full Stack",
+            "configurations": [
+                "🎯 Flutter: Debug with Backend",
+                "🚀 FastAPI Dev Server"
+            ]
+        },
+        {
+            "name": "🧪 Debug All Tests",
+            "configurations": [
+                "🧪 Flutter: Test Debug",
+                "🧪 Run API Tests"
+            ]
+        }
+    ]
+}

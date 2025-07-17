@@ -1,55 +1,79 @@
-# Pet Health Tracker - FastAPI Backend
+# Pet Health Tracker - Full-Stack Application
 
-A comprehensive FastAPI backend for the AI-Powered Pet Health Tracker application, featuring user authentication, pet management, health logging, AI image analysis, and veterinarian portal functionality.
+A comprehensive AI-Powered Pet Health Tracker application with FastAPI backend and Flutter frontend, featuring automated API client generation, user authentication, pet management, health logging, AI image analysis, and veterinarian portal functionality.
 
 ## 🏗️ Architecture
 
-This backend implements a modular architecture with the following components:
+This full-stack application implements a modern architecture with the following components:
 
+### Backend (FastAPI)
 - **FastAPI Application**: Modern, high-performance web framework
 - **SQLAlchemy ORM**: Database abstraction layer with SQLite for development
 - **JWT Authentication**: Secure token-based authentication for users and veterinarians  
 - **Pydantic Schemas**: Request/response validation and serialization
 - **Google Gemini AI**: Image analysis for health assessment and medication extraction
-- **Modular Design**: Clean separation of concerns with services and routers
+- **OpenAPI Specification**: Auto-generated API documentation and schema
+
+### Frontend (Flutter)
+- **Flutter Framework**: Cross-platform mobile application
+- **BLoC State Management**: Reactive state management with flutter_bloc
+- **Generated API Client**: Automatically generated Dart client from OpenAPI spec
+- **Type-Safe Integration**: Strongly typed API communication
 
 ## 📁 Project Structure
 
 ```
-app/
-├── core/
-│   ├── config.py          # Application configuration
-│   ├── database.py        # Database connection and session management
-│   └── security.py        # Authentication and authorization
-├── models/
-│   └── database.py        # SQLAlchemy database models
-├── schemas/
-│   ├── auth.py           # Authentication request/response schemas
-│   ├── pets.py           # Pet-related schemas
-│   ├── health.py         # Health logging schemas
-│   ├── ai.py             # AI analysis schemas
-│   └── vet.py            # Veterinarian portal schemas
-├── routers/
-│   ├── auth.py           # Authentication endpoints
-│   ├── pets.py           # Pet CRUD operations
-│   ├── health.py         # Health logging endpoints
-│   ├── ai.py             # AI analysis endpoints
-│   └── vet.py            # Veterinarian portal endpoints
-├── services/
-│   └── ai_service.py     # Google Gemini AI integration
-└── main.py               # FastAPI application entry point
+/Users/hongfeiyang/dev/med-tracker/
+├── app/                           # FastAPI Backend
+│   ├── core/
+│   │   ├── config.py              # Application configuration
+│   │   ├── database.py            # Database connection and session management
+│   │   └── security.py            # Authentication and authorization
+│   ├── models/
+│   │   └── database.py            # SQLAlchemy database models
+│   ├── schemas/
+│   │   ├── auth.py               # Authentication request/response schemas
+│   │   ├── pets.py               # Pet-related schemas
+│   │   ├── health.py             # Health logging schemas
+│   │   ├── ai.py                 # AI analysis schemas
+│   │   └── vet.py                # Veterinarian portal schemas
+│   ├── routers/
+│   │   ├── auth.py               # Authentication endpoints
+│   │   ├── pets.py               # Pet CRUD operations
+│   │   ├── health.py             # Health logging endpoints
+│   │   ├── ai.py                 # AI analysis endpoints
+│   │   └── vet.py                # Veterinarian portal endpoints
+│   ├── services/
+│   │   └── ai_service.py         # Google Gemini AI integration
+│   └── main.py                   # FastAPI application entry point
+├── pet_health_tracker/           # Flutter Frontend
+│   ├── Makefile                  # API client generation commands
+│   ├── openapi-generator-config.yaml  # OpenAPI generator configuration
+│   ├── packages/
+│   │   └── pet_health_api_client/     # Generated API client package
+│   ├── lib/
+│   │   ├── blocs/                # BLoC state management
+│   │   ├── models/               # Data models
+│   │   ├── repositories/         # Data layer using generated client
+│   │   ├── screens/              # UI screens
+│   │   └── main.dart             # Flutter app entry point
+│   └── pubspec.yaml              # Flutter dependencies
+├── requirements.txt              # Python dependencies
+└── .env.example                  # Environment configuration template
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Python 3.9+
-- Virtual environment (recommended)
+- **Python 3.9+** for backend
+- **Flutter 3.0+** for frontend  
+- **Docker** for API client generation
+- **Virtual environment** (recommended)
 
-### Installation
+### Backend Setup
 
-1. **Clone and navigate to the project:**
+1. **Navigate to project root:**
    ```bash
    cd /Users/hongfeiyang/dev/med-tracker
    ```
@@ -60,7 +84,7 @@ app/
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install dependencies:**
+3. **Install Python dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
@@ -70,15 +94,129 @@ app/
    cp .env.example .env  # Edit .env with your configuration
    ```
 
-5. **Start the development server:**
+5. **Start the FastAPI server:**
    ```bash
    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
    ```
 
-6. **Access the API:**
+6. **Verify backend is running:**
    - API: http://localhost:8000
    - Interactive Docs: http://localhost:8000/docs
    - OpenAPI Schema: http://localhost:8000/openapi.json
+
+### Frontend Setup
+
+1. **Navigate to Flutter project:**
+   ```bash
+   cd pet_health_tracker
+   ```
+
+2. **Install Flutter dependencies:**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Generate API client** (with backend running):
+   ```bash
+   make api-generate
+   ```
+
+4. **Run the Flutter app:**
+   ```bash
+   flutter run
+   ```
+
+### 🔄 API Client Generation Workflow
+
+The project includes an automated pipeline for generating type-safe Dart API clients from the backend's OpenAPI specification:
+
+1. **Start backend server** (if not already running)
+2. **Navigate to Flutter project:** `cd pet_health_tracker`
+3. **Generate client:** `make api-generate`
+4. **Client automatically integrates** with your Flutter app
+
+**Available Make commands:**
+```bash
+make help           # Show available commands
+make api-generate   # Generate API client from running backend
+make clean          # Remove temporary files
+```
+
+## 🔧 Automated API Client Generation
+
+This project features a professional-grade automated API client generation pipeline that ensures type-safe communication between the Flutter frontend and FastAPI backend.
+
+### 🏗️ Pipeline Architecture
+
+The system uses the official OpenAPI Generator with Docker to create a standalone Dart package:
+
+```
+Backend (FastAPI) → OpenAPI Spec → Docker Generator → Dart Package → Flutter App
+```
+
+### ✨ Key Features
+
+- **✅ Fully Automated**: Single `make api-generate` command handles everything
+- **✅ Type-Safe**: Generated Dart models with null safety and serialization
+- **✅ Standalone Package**: Clean separation in `packages/pet_health_api_client/`
+- **✅ Authentication Ready**: Built-in JWT Bearer token support
+- **✅ Auto-Dependency Management**: Automatically installs generated package dependencies
+- **✅ Git-Friendly**: Generated files properly excluded from version control
+
+### 🛠️ Generated Components
+
+The pipeline automatically creates:
+
+- **6 API Clients**: Authentication, Pets, Health, AI, Veterinarian, Default
+- **27+ Data Models**: Complete request/response types with serialization
+- **Authentication Handlers**: Bearer token, API key, OAuth support
+- **Type-Safe Endpoints**: Strongly typed method signatures
+- **Error Handling**: Structured API exception handling
+
+### 📂 Package Structure
+
+```
+pet_health_tracker/packages/pet_health_api_client/
+├── lib/
+│   ├── api/                    # Generated API clients
+│   │   ├── authentication_api.dart
+│   │   ├── pets_api.dart
+│   │   ├── health_api.dart
+│   │   └── ...
+│   ├── model/                  # Generated data models
+│   │   ├── pet_response.dart
+│   │   ├── user_create.dart
+│   │   └── ...
+│   ├── auth/                   # Authentication handlers
+│   └── pet_health_api_client.dart  # Main export
+└── pubspec.yaml               # Package dependencies
+```
+
+### 🔄 Development Workflow
+
+1. **Make backend changes** and ensure server is running
+2. **Regenerate client:** `cd pet_health_tracker && make api-generate`
+3. **Updated types** automatically available in your Flutter app
+4. **Type errors** caught at compile time, not runtime
+
+### 🎯 Integration Example
+
+```dart
+// Before: Manual HTTP calls
+final response = await http.post(
+  Uri.parse('$baseUrl/pets/'),
+  headers: {'Authorization': 'Bearer $token'},
+  body: jsonEncode({'name': 'Fluffy'}),
+);
+
+// After: Generated type-safe client
+final petsApi = PetsApi();
+final pet = await petsApi.createPetPetsPost(
+  PetCreate(name: 'Fluffy', breed: 'Golden Retriever'),
+);
+```
+
+This pipeline ensures your Flutter app stays perfectly synchronized with your backend API changes, eliminating integration bugs and improving developer productivity.
 
 ## 🗄️ Database
 
@@ -269,17 +407,34 @@ Common issues:
 
 ## 📝 MVP Status
 
-✅ **Completed Features:**
+✅ **Backend (FastAPI) - Completed:**
 - User registration and authentication
 - Pet profile management (CRUD)
-- Health logging with AI analysis stubs
+- Health logging with AI analysis
 - Veterinarian portal with prescription management
 - AI service integration (Gemini API)
 - Comprehensive API documentation
+- OpenAPI 3.1 specification generation
 
-🔄 **Ready for Integration:**
-- Frontend mobile application
-- Cloud deployment infrastructure
-- Enhanced AI/ML capabilities
+✅ **Frontend (Flutter) - Completed:**
+- Flutter project structure with BLoC state management
+- Automated API client generation pipeline
+- Type-safe repository pattern implementation
+- Generated Dart models and API clients
+- Professional development workflow
 
-This backend provides a solid foundation for the Pet Health Tracker MVP and is ready for frontend integration and cloud deployment.
+✅ **Integration Pipeline - Completed:**
+- Automated OpenAPI client generation with Docker
+- Standalone package architecture
+- Make-based development workflow
+- Git integration with proper exclusions
+- Dependency management automation
+
+🔄 **Ready for Enhancement:**
+- Cloud deployment infrastructure (GCP)
+- Enhanced AI/ML capabilities (Vertex AI)
+- Production database setup (PostgreSQL)
+- Mobile app UI/UX implementation
+- Authentication token management
+
+This full-stack application provides a robust foundation for the Pet Health Tracker MVP with professional-grade automated API integration, ensuring type-safe communication between frontend and backend components.

@@ -1,0 +1,62 @@
+{
+  "recommendations": [
+    // Essential Flutter & Dart Extensions
+    "dart-code.dart-code",
+    "dart-code.flutter",
+    
+    // BLoC Development
+    "felixangelov.bloc",
+    
+    // Code Quality & Formatting
+    "ms-vscode.vscode-json",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next",
+    
+    // Version Control
+    "mhutchie.git-graph",
+    "eamodio.gitlens",
+    
+    // Productivity Extensions
+    "gruntfuggly.todo-tree",
+    "streetsidesoftware.code-spell-checker",
+    "ms-vscode.live-server",
+    
+    // API Development
+    "humao.rest-client",
+    "rangav.vscode-thunder-client",
+    
+    // Firebase Integration
+    "toba.vsfire",
+    
+    // Markdown & Documentation
+    "yzhang.markdown-all-in-one",
+    "shd101wyy.markdown-preview-enhanced",
+    
+    // File Management
+    "ms-vscode.vscode-icons",
+    "pkief.material-icon-theme",
+    "ms-vscode.hexeditor",
+    
+    // Flutter Specific Tools
+    "nash.awesome-flutter-snippets",
+    "alexisvt.flutter-snippets",
+    "gornivv.vscode-flutter-files",
+    "robert-brunhage.flutter-riverpod-snippets",
+    
+    // Code Analysis
+    "ms-vscode.vscode-eslint",
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    
+    // Terminal & Shell
+    "ms-vscode.powershell",
+    
+    // Performance Monitoring
+    "ms-vscode.vscode-github-issue-notebooks"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify",
+    "ms-vscode.node-debug2"
+  ]
+}

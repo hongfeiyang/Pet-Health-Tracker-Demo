@@ -1,0 +1,131 @@
+{
+  // Dart & Flutter Settings
+  "dart.flutterSdkPath": null,
+  "dart.debugExternalPackageLibraries": false,
+  "dart.debugSdkLibraries": false,
+  "dart.insertArgumentPlaceholders": true,
+  "dart.enableSnippets": true,
+  "dart.lineLength": 80,
+  "dart.showTodos": true,
+  "dart.allowAnalytics": false,
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  "dart.hotReloadOnSave": "always",
+  "dart.openDevTools": "flutter",
+  
+  // Editor Settings
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.rulers": [80],
+  "editor.selectionHighlight": false,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggestSelection": "first",
+  "editor.tabCompletion": "onlySnippets",
+  "editor.wordBasedSuggestions": "off",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  
+  // File Associations
+  "files.associations": {
+    "*.dart": "dart"
+  },
+  
+  // Search Settings
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/tmp": true,
+    "**/coverage": true,
+    "**/build": true,
+    "**/.dart_tool": true,
+    "**/.flutter-plugins": true,
+    "**/.flutter-plugins-dependencies": true,
+    "**/ios/Pods": true,
+    "**/ios/Runner.xcworkspace": true,
+    "**/android/.gradle": true,
+    "**/android/captures": true,
+    "**/android/gradlew": true,
+    "**/android/gradlew.bat": true,
+    "**/android/local.properties": true,
+    "**/android/**/GeneratedPluginRegistrant.java": true,
+    "**/android/key.properties": true,
+    "**/.vscode/launch.json": false
+  },
+  
+  // File Watcher Settings
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.dart_tool/**": true,
+    "**/build/**": true
+  },
+  
+  // Emmet Settings
+  "emmet.includeLanguages": {
+    "dart": "html"
+  },
+  
+  // BLoC-specific Settings
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  
+  // Git Settings
+  "git.ignoreLimitWarning": true,
+  
+  // Terminal Settings
+  "terminal.integrated.env.osx": {
+    "FVM_HOME": "$HOME/fvm"
+  },
+  "terminal.integrated.env.linux": {
+    "FVM_HOME": "$HOME/fvm"
+  },
+  "terminal.integrated.env.windows": {
+    "FVM_HOME": "%USERPROFILE%\\fvm"
+  },
+  
+  // Flutter Inspector
+  "dart.flutterOutline": true,
+  "dart.closingLabels": true,
+  
+  // Performance Settings
+  "dart.analysisServerFolding": true,
+  "dart.showDependencyTree": true,
+  
+  // TODO Tree Settings
+  "todo-tree.filtering.excludeGlobs": [
+    "**/vendor/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/bower_components/**",
+    "**/build/**",
+    "**/.vscode/**",
+    "**/.github/**"
+  ],
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  
+  // Auto-save
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000
+}

@@ -1,0 +1,119 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter: Debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "args": []
+    },
+    {
+      "name": "Flutter: Profile",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "console": "debugConsole",
+      "args": ["--enable-asserts"]
+    },
+    {
+      "name": "Flutter: Release",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "release",
+      "console": "debugConsole"
+    },
+    {
+      "name": "Flutter: Debug (Android)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "deviceId": "android",
+      "args": ["--enable-asserts"]
+    },
+    {
+      "name": "Flutter: Debug (iOS)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "deviceId": "ios",
+      "args": ["--enable-asserts"]
+    },
+    {
+      "name": "Flutter: Debug (Chrome)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "deviceId": "chrome",
+      "args": ["--enable-asserts", "--web-renderer=html"]
+    },
+    {
+      "name": "Flutter: Test Debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "test/widget_test.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "args": ["--enable-asserts"]
+    },
+    {
+      "name": "Dart: Debug Current File",
+      "type": "dart",
+      "request": "launch",
+      "program": "${file}",
+      "console": "debugConsole",
+      "args": ["--enable-asserts"]
+    },
+    {
+      "name": "Flutter: Debug with API Mock",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "args": ["--enable-asserts", "--dart-define=USE_MOCK_API=true"]
+    },
+    {
+      "name": "Flutter: Debug with Backend",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "args": [
+        "--enable-asserts",
+        "--dart-define=API_BASE_URL=http://localhost:8000",
+        "--dart-define=USE_MOCK_API=false"
+      ]
+    },
+    {
+      "name": "Flutter: Debug (Hot Reload)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "console": "debugConsole",
+      "args": ["--enable-asserts", "--hot"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Flutter: Debug All Platforms",
+      "configurations": [
+        "Flutter: Debug (Android)",
+        "Flutter: Debug (iOS)",
+        "Flutter: Debug (Chrome)"
+      ]
+    }
+  ]
+}

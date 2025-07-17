@@ -1,0 +1,253 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flutter: Get Packages",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["pub", "get"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Clean",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["clean"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Analyze",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["analyze"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [
+        {
+          "owner": "dart",
+          "fileLocation": "absolute",
+          "pattern": {
+            "regexp": "^(.*?)\\((\\d+):(\\d+)\\):\\s+(error|warning|info)\\s+•\\s+(.*?)\\s+•\\s+(.*?)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5,
+            "code": 6
+          }
+        }
+      ]
+    },
+    {
+      "label": "Flutter: Test",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["test"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Build APK (Debug)",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "apk", "--debug"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Build APK (Release)",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "apk", "--release"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Build iOS (Debug)",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "ios", "--debug", "--no-codesign"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          "FLUTTER_BUILD_MODE": "debug"
+        }
+      }
+    },
+    {
+      "label": "Flutter: Build iOS (Release)",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "ios", "--release", "--no-codesign"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          "FLUTTER_BUILD_MODE": "release"
+        }
+      }
+    },
+    {
+      "label": "Flutter: Build Web",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "web"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Run (Debug)",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["run", "--debug"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "Flutter: Run (Release)",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["run", "--release"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "Flutter: Hot Reload",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["run", "--hot"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "Dart: Pub Outdated",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["pub", "outdated"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dart: Pub Upgrade",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["pub", "upgrade"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Doctor",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["doctor", "-v"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Devices",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["devices"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLoC: Generate BLoC Template",
+      "type": "shell",
+      "command": "echo",
+      "args": ["Creating BLoC template files..."],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Project: Full Clean & Rebuild",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["clean"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Flutter: Clean",
+        "Flutter: Get Packages"
+      ]
+    }
+  ]
+}

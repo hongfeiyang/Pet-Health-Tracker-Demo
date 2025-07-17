@@ -1,0 +1,118 @@
+[
+  // Flutter Hot Reload
+  {
+    "key": "ctrl+r",
+    "command": "dart.hotReload",
+    "when": "dart-code:anyProjectLoaded"
+  },
+  {
+    "key": "cmd+r",
+    "command": "dart.hotReload",
+    "when": "dart-code:anyProjectLoaded && isMac"
+  },
+  
+  // Flutter Hot Restart
+  {
+    "key": "ctrl+shift+r",
+    "command": "dart.hotRestart",
+    "when": "dart-code:anyProjectLoaded"
+  },
+  {
+    "key": "cmd+shift+r",
+    "command": "dart.hotRestart",
+    "when": "dart-code:anyProjectLoaded && isMac"
+  },
+  
+  // Open Flutter Inspector
+  {
+    "key": "ctrl+shift+i",
+    "command": "dart.openFlutterInspector",
+    "when": "dart-code:anyProjectLoaded"
+  },
+  
+  // Flutter: Get Packages
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Flutter: Get Packages"
+  },
+  
+  // Run Flutter Tests
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Flutter: Test"
+  },
+  
+  // Flutter Analyze
+  {
+    "key": "ctrl+shift+a",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Flutter: Analyze"
+  },
+  
+  // Quick Fix
+  {
+    "key": "ctrl+.",
+    "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  
+  // Organize Imports
+  {
+    "key": "ctrl+shift+o",
+    "command": "editor.action.organizeImports",
+    "when": "editorTextFocus && !editorReadonly && resourceExtname == '.dart'"
+  },
+  
+  // Format Document
+  {
+    "key": "ctrl+shift+f",
+    "command": "editor.action.formatDocument",
+    "when": "editorTextFocus && !editorReadonly && resourceExtname == '.dart'"
+  },
+  
+  // Show Hover
+  {
+    "key": "ctrl+k ctrl+i",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  
+  // Go to Definition
+  {
+    "key": "f12",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  
+  // BLoC: Create Event
+  {
+    "key": "ctrl+shift+e",
+    "command": "editor.action.insertSnippet",
+    "args": {
+      "name": "bloc_event"
+    },
+    "when": "editorTextFocus && resourceExtname == '.dart'"
+  },
+  
+  // BLoC: Create State
+  {
+    "key": "ctrl+shift+s",
+    "command": "editor.action.insertSnippet",
+    "args": {
+      "name": "bloc_state"
+    },
+    "when": "editorTextFocus && resourceExtname == '.dart'"
+  },
+  
+  // BLoC: Create BLoC
+  {
+    "key": "ctrl+shift+b",
+    "command": "editor.action.insertSnippet",
+    "args": {
+      "name": "bloc_bloc"
+    },
+    "when": "editorTextFocus && resourceExtname == '.dart'"
+  }
+]

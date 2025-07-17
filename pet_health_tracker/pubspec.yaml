@@ -46,8 +46,8 @@ dependencies:
   image_picker: ^1.0.4
   
   # Firebase (for future JWT auth)
-  firebase_auth: ^4.15.3
-  firebase_messaging: ^14.7.9
+  # firebase_auth: ^4.15.3
+  # firebase_messaging: ^14.7.9
   
   # Utilities
   uuid: ^4.2.1

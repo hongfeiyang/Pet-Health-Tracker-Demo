@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../models/health_log.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
 
 abstract class HealthState extends Equatable {
   const HealthState();
@@ -13,7 +13,7 @@ class HealthInitial extends HealthState {}
 class HealthLoading extends HealthState {}
 
 class HealthLoaded extends HealthState {
-  final List<HealthLog> healthLogs;
+  final List<HealthLogResponse> healthLogs;
   final String petId;
 
   const HealthLoaded({

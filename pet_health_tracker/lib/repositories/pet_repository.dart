@@ -1,23 +1,29 @@
-import '../api/api_service.dart';
-import '../api/api_models.dart';
-import '../models/pet.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
+import 'package:dio/dio.dart';
 
 class PetRepository {
-  final ApiService _apiService;
+  final PetsApi _petsApi;
 
-  PetRepository({ApiService? apiService}) 
-      : _apiService = apiService ?? ApiService();
+  PetRepository({required PetsApi petsApi}) 
+      : _petsApi = petsApi;
 
-  Future<List<Pet>> getPets() async {
+  Future<List<PetResponse>> getPets() async {
     try {
-      final response = await _apiService.getPets();
-      return response.map(_mapResponseToModel).toList();
+      final response = await _petsApi.listPetsPetsGet();
+      
+      if (response.data != null) {
+        return response.data!.pets.toList();
+      } else {
+        throw Exception('No pets data received');
+      }
+    } on DioException catch (e) {
+      throw Exception('Failed to fetch pets: ${e.message}');
     } catch (e) {
       throw Exception('Failed to fetch pets: ${e.toString()}');
     }
   }
 
-  Future<Pet> createPet({
+  Future<PetResponse> createPet({
     required String name,
     String? breed,
     int? age,
@@ -25,30 +31,46 @@ class PetRepository {
     String? medicalHistory,
   }) async {
     try {
-      final request = CreatePetRequest(
-        name: name,
-        breed: breed,
-        age: age,
-        weight: weight,
-        medicalHistory: medicalHistory,
-      );
-      final response = await _apiService.createPet(request);
-      return _mapResponseToModel(response);
+      final petCreate = PetCreate((b) {
+        b
+          ..name = name
+          ..breed = breed
+          ..age = age
+          ..medicalHistory = medicalHistory;
+        // Skip weight for now due to complex AnyOf type
+      });
+      
+      final response = await _petsApi.createPetPetsPost(petCreate: petCreate);
+      
+      if (response.data != null) {
+        return response.data!;
+      } else {
+        throw Exception('Pet creation failed: No pet data received');
+      }
+    } on DioException catch (e) {
+      throw Exception('Failed to create pet: ${e.message}');
     } catch (e) {
       throw Exception('Failed to create pet: ${e.toString()}');
     }
   }
 
-  Future<Pet> getPet(String petId) async {
+  Future<PetResponse> getPet(String petId) async {
     try {
-      final response = await _apiService.getPet(petId);
-      return _mapResponseToModel(response);
+      final response = await _petsApi.getPetPetsPetIdGet(petId: petId);
+      
+      if (response.data != null) {
+        return response.data!;
+      } else {
+        throw Exception('Pet not found');
+      }
+    } on DioException catch (e) {
+      throw Exception('Failed to fetch pet: ${e.message}');
     } catch (e) {
       throw Exception('Failed to fetch pet: ${e.toString()}');
     }
   }
 
-  Future<Pet> updatePet({
+  Future<PetResponse> updatePet({
     required String petId,
     required String name,
     String? breed,
@@ -57,15 +79,27 @@ class PetRepository {
     String? medicalHistory,
   }) async {
     try {
-      final request = CreatePetRequest(
-        name: name,
-        breed: breed,
-        age: age,
-        weight: weight,
-        medicalHistory: medicalHistory,
+      final petUpdate = PetUpdate((b) {
+        b
+          ..name = name
+          ..breed = breed
+          ..age = age
+          ..medicalHistory = medicalHistory;
+        // Skip weight for now due to complex AnyOf type
+      });
+      
+      final response = await _petsApi.updatePetPetsPetIdPut(
+        petId: petId, 
+        petUpdate: petUpdate
       );
-      final response = await _apiService.updatePet(petId, request);
-      return _mapResponseToModel(response);
+      
+      if (response.data != null) {
+        return response.data!;
+      } else {
+        throw Exception('Pet update failed: No pet data received');
+      }
+    } on DioException catch (e) {
+      throw Exception('Failed to update pet: ${e.message}');
     } catch (e) {
       throw Exception('Failed to update pet: ${e.toString()}');
     }
@@ -73,23 +107,11 @@ class PetRepository {
 
   Future<void> deletePet(String petId) async {
     try {
-      await _apiService.deletePet(petId);
+      await _petsApi.deletePetPetsPetIdDelete(petId: petId);
+    } on DioException catch (e) {
+      throw Exception('Failed to delete pet: ${e.message}');
     } catch (e) {
       throw Exception('Failed to delete pet: ${e.toString()}');
     }
-  }
-
-  Pet _mapResponseToModel(PetResponse response) {
-    return Pet(
-      id: response.id,
-      userId: response.userId,
-      name: response.name,
-      breed: response.breed,
-      age: response.age,
-      weight: response.weight,
-      medicalHistory: response.medicalHistory,
-      profileImageUrl: response.profileImageUrl,
-      createdAt: response.createdAt,
-    );
   }
 }

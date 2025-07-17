@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart' as api;
 import '../../blocs/health/health_bloc.dart';
 import '../../blocs/health/health_event.dart';
 import '../../blocs/health/health_state.dart';
-import '../../models/pet.dart';
-import '../../models/health_log.dart';
 
 class AddHealthLogScreen extends StatefulWidget {
-  final Pet pet;
+  final api.PetResponse pet;
 
   const AddHealthLogScreen({super.key, required this.pet});
 
@@ -20,7 +19,7 @@ class _AddHealthLogScreenState extends State<AddHealthLogScreen> {
   final _valueController = TextEditingController();
   final _notesController = TextEditingController();
   
-  LogType _selectedLogType = LogType.weight;
+  api.LogType _selectedLogType = api.LogType.weight;
 
   @override
   void dispose() {
@@ -74,13 +73,13 @@ class _AddHealthLogScreenState extends State<AddHealthLogScreen> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        DropdownButtonFormField<LogType>(
+                        DropdownButtonFormField<api.LogType>(
                           value: _selectedLogType,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: Icon(Icons.category),
                           ),
-                          items: LogType.values.map((logType) {
+                          items: api.LogType.values.map((logType) {
                             return DropdownMenuItem(
                               value: logType,
                               child: Row(
@@ -91,7 +90,7 @@ class _AddHealthLogScreenState extends State<AddHealthLogScreen> {
                                     size: 20,
                                   ),
                                   const SizedBox(width: 8),
-                                  Text(logType.displayName),
+                                  Text(_getLogTypeDisplayName(logType)),
                                 ],
                               ),
                             );
@@ -115,8 +114,8 @@ class _AddHealthLogScreenState extends State<AddHealthLogScreen> {
                           ),
                           keyboardType: _getKeyboardType(_selectedLogType),
                           validator: (value) {
-                            if (_selectedLogType == LogType.weight || 
-                                _selectedLogType == LogType.temperature) {
+                            if (_selectedLogType == api.LogType.weight || 
+                                _selectedLogType == api.LogType.temperature) {
                               if (value == null || value.trim().isEmpty) {
                                 return 'Please enter a value';
                               }
@@ -124,11 +123,11 @@ class _AddHealthLogScreenState extends State<AddHealthLogScreen> {
                               if (numValue == null) {
                                 return 'Please enter a valid number';
                               }
-                              if (_selectedLogType == LogType.weight && 
+                              if (_selectedLogType == api.LogType.weight && 
                                   (numValue < 0 || numValue > 200)) {
                                 return 'Weight should be between 0-200 kg';
                               }
-                              if (_selectedLogType == LogType.temperature && 
+                              if (_selectedLogType == api.LogType.temperature && 
                                   (numValue < 30 || numValue > 45)) {
                                 return 'Temperature should be between 30-45°C';
                               }
@@ -213,70 +212,95 @@ class _AddHealthLogScreenState extends State<AddHealthLogScreen> {
         );
   }
 
-  IconData _getLogTypeIcon(LogType logType) {
+  String _getLogTypeDisplayName(api.LogType logType) {
     switch (logType) {
-      case LogType.weight:
+      case api.LogType.weight:
+        return 'Weight';
+      case api.LogType.temperature:
+        return 'Temperature';
+      case api.LogType.vetVisit:
+        return 'Vet Visit';
+      case api.LogType.vaccination:
+        return 'Vaccination';
+      case api.LogType.symptom:
+        return 'Symptom';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  IconData _getLogTypeIcon(api.LogType logType) {
+    switch (logType) {
+      case api.LogType.weight:
         return Icons.monitor_weight;
-      case LogType.temperature:
+      case api.LogType.temperature:
         return Icons.thermostat;
-      case LogType.vetVisit:
+      case api.LogType.vetVisit:
         return Icons.local_hospital;
-      case LogType.vaccination:
+      case api.LogType.vaccination:
         return Icons.vaccines;
-      case LogType.symptom:
+      case api.LogType.symptom:
         return Icons.sick;
+      default:
+        return Icons.pets;
     }
   }
 
-  Color _getLogTypeColor(LogType logType) {
+  Color _getLogTypeColor(api.LogType logType) {
     switch (logType) {
-      case LogType.weight:
+      case api.LogType.weight:
         return Colors.blue;
-      case LogType.temperature:
+      case api.LogType.temperature:
         return Colors.orange;
-      case LogType.vetVisit:
+      case api.LogType.vetVisit:
         return Colors.green;
-      case LogType.vaccination:
+      case api.LogType.vaccination:
         return Colors.purple;
-      case LogType.symptom:
+      case api.LogType.symptom:
         return Colors.red;
+      default:
+        return Colors.grey;
     }
   }
 
-  String _getValueLabel(LogType logType) {
+  String _getValueLabel(api.LogType logType) {
     switch (logType) {
-      case LogType.weight:
+      case api.LogType.weight:
         return 'Weight (kg) *';
-      case LogType.temperature:
+      case api.LogType.temperature:
         return 'Temperature (°C) *';
-      case LogType.vetVisit:
+      case api.LogType.vetVisit:
         return 'Clinic/Doctor Name (Optional)';
-      case LogType.vaccination:
+      case api.LogType.vaccination:
         return 'Vaccine Name (Optional)';
-      case LogType.symptom:
+      case api.LogType.symptom:
         return 'Symptom Description (Optional)';
+      default:
+        return 'Value (Optional)';
     }
   }
 
-  String _getValueHint(LogType logType) {
+  String _getValueHint(api.LogType logType) {
     switch (logType) {
-      case LogType.weight:
+      case api.LogType.weight:
         return 'e.g., 25.5';
-      case LogType.temperature:
+      case api.LogType.temperature:
         return 'e.g., 38.5';
-      case LogType.vetVisit:
+      case api.LogType.vetVisit:
         return 'e.g., Dr. Smith at Pet Care Clinic';
-      case LogType.vaccination:
+      case api.LogType.vaccination:
         return 'e.g., Rabies, DHPP';
-      case LogType.symptom:
+      case api.LogType.symptom:
         return 'e.g., Vomiting, Lethargy';
+      default:
+        return 'Enter value';
     }
   }
 
-  TextInputType _getKeyboardType(LogType logType) {
+  TextInputType _getKeyboardType(api.LogType logType) {
     switch (logType) {
-      case LogType.weight:
-      case LogType.temperature:
+      case api.LogType.weight:
+      case api.LogType.temperature:
         return TextInputType.number;
       default:
         return TextInputType.text;

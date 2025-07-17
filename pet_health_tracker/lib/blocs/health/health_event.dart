@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../models/health_log.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
 
 abstract class HealthEvent extends Equatable {
   const HealthEvent();

@@ -41,6 +41,7 @@ dependencies:
   
   # HTTP requests
   http: ^1.1.0
+  dio: ^5.7.0
   
   # Image picker
   image_picker: ^1.0.4
@@ -51,6 +52,13 @@ dependencies:
   
   # Utilities
   uuid: ^4.2.1
+  
+  # Generated API client
+  pet_health_api_client:
+    path: packages/pet_health_api_client
+  
+  # For built_value collections
+  built_collection: ^5.1.1
 
 dev_dependencies:
   flutter_test:

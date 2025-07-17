@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
 import '../../blocs/pets/pets_bloc.dart';
 import '../../blocs/pets/pets_event.dart';
 import '../../blocs/pets/pets_state.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/auth/auth_event.dart';
-import '../../models/pet.dart';
 import 'add_pet_screen.dart';
 import 'pet_detail_screen.dart';
 
@@ -134,7 +134,7 @@ class _PetsListScreenState extends State<PetsListScreen> {
     );
   }
 
-  void _navigateToPetDetail(BuildContext context, Pet pet) {
+  void _navigateToPetDetail(BuildContext context, PetResponse pet) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PetDetailScreen(pet: pet),
@@ -144,7 +144,7 @@ class _PetsListScreenState extends State<PetsListScreen> {
 }
 
 class _PetCard extends StatelessWidget {
-  final Pet pet;
+  final PetResponse pet;
   final VoidCallback onTap;
 
   const _PetCard({

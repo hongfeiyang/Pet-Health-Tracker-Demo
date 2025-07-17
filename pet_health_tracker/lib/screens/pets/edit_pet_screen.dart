@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
 import '../../blocs/pets/pets_bloc.dart';
 import '../../blocs/pets/pets_event.dart';
 import '../../blocs/pets/pets_state.dart';
-import '../../models/pet.dart';
 
 class EditPetScreen extends StatefulWidget {
-  final Pet pet;
+  final PetResponse pet;
 
   const EditPetScreen({super.key, required this.pet});
 
@@ -28,7 +28,7 @@ class _EditPetScreenState extends State<EditPetScreen> {
     _nameController = TextEditingController(text: widget.pet.name);
     _breedController = TextEditingController(text: widget.pet.breed ?? '');
     _ageController = TextEditingController(text: widget.pet.age?.toString() ?? '');
-    _weightController = TextEditingController(text: widget.pet.weight?.toString() ?? '');
+    _weightController = TextEditingController(text: widget.pet.weight ?? '');
     _medicalHistoryController = TextEditingController(text: widget.pet.medicalHistory ?? '');
   }
 

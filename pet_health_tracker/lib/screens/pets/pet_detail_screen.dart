@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
 import '../../blocs/pets/pets_bloc.dart';
 import '../../blocs/pets/pets_event.dart';
 import '../../blocs/pets/pets_state.dart';
 import '../../blocs/health/health_bloc.dart';
 import '../../blocs/health/health_event.dart';
-import '../../models/pet.dart';
 import '../health/health_logs_screen.dart';
 import 'edit_pet_screen.dart';
 
 class PetDetailScreen extends StatelessWidget {
-  final Pet pet;
+  final PetResponse pet;
 
   const PetDetailScreen({
     super.key,

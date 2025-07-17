@@ -1,52 +1,77 @@
-import '../api/api_service.dart';
-import '../api/api_models.dart';
-import '../models/user.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
+import 'package:dio/dio.dart';
 
 class AuthRepository {
-  final ApiService _apiService;
+  final AuthenticationApi _authApi;
+  final PetHealthApiClient _apiClient;
+  String? _authToken;
 
-  AuthRepository({ApiService? apiService}) 
-      : _apiService = apiService ?? ApiService();
+  AuthRepository({required AuthenticationApi authApi, required PetHealthApiClient apiClient}) 
+      : _authApi = authApi, _apiClient = apiClient;
 
-  Future<User> login(String email, String password) async {
+  Future<UserResponse> login(String email, String password) async {
     try {
-      final request = LoginRequest(email: email, password: password);
-      final response = await _apiService.login(request);
+      final userLogin = UserLogin((b) => b
+        ..email = email
+        ..password = password);
       
-      _apiService.setAuthToken(response.token);
+      final response = await _authApi.loginUserAuthLoginPost(userLogin: userLogin);
       
-      return User(
-        id: response.userId,
-        email: email,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-      );
+      if (response.data != null) {
+        _authToken = response.data!.accessToken;
+        
+        // Set bearer token on the shared API client
+        _apiClient.setBearerAuth('HTTPBearer', _authToken!);
+        
+        // Return a user response - we'll need to get user info separately
+        // For now, return basic info
+        return UserResponse((b) => b
+          ..id = 'temp-id' // TODO: Get from separate API call or JWT decode
+          ..email = email
+          ..createdAt = DateTime.now());
+      } else {
+        throw Exception('Login failed: No access token received');
+      }
+    } on DioException catch (e) {
+      throw Exception('Login failed: ${e.message}');
     } catch (e) {
       throw Exception('Login failed: ${e.toString()}');
     }
   }
 
-  Future<User> register(String email, String password) async {
+  Future<UserResponse> register(String email, String password) async {
     try {
-      final request = RegisterRequest(email: email, password: password);
-      final response = await _apiService.register(request);
+      final userCreate = UserCreate((b) => b
+        ..email = email
+        ..password = password);
       
-      _apiService.setAuthToken(response.token);
+      final response = await _authApi.registerUserAuthRegisterPost(userCreate: userCreate);
       
-      return User(
-        id: response.userId,
-        email: email,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-      );
+      if (response.data != null) {
+        return response.data!;
+      } else {
+        throw Exception('Registration failed: No user data received');
+      }
+    } on DioException catch (e) {
+      throw Exception('Registration failed: ${e.message}');
     } catch (e) {
       throw Exception('Registration failed: ${e.toString()}');
     }
   }
 
   Future<void> logout() async {
-    _apiService.clearAuthToken();
+    _authToken = null;
+    // Clear bearer token from the shared API client
+    _apiClient.setBearerAuth('HTTPBearer', '');
   }
 
-  bool get isAuthenticated => false;
+  bool get isAuthenticated => _authToken != null;
+  
+  String? get authToken => _authToken;
+  
+  void setAuthToken(String token) {
+    _authToken = token;
+    // Set bearer token on the shared API client
+    _apiClient.setBearerAuth('HTTPBearer', token);
+  }
 }

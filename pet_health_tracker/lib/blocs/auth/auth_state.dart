@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../models/user.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
 
 abstract class AuthState extends Equatable {
   const AuthState();
@@ -13,7 +13,7 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthAuthenticated extends AuthState {
-  final User user;
+  final UserResponse user;
 
   const AuthAuthenticated({required this.user});
 

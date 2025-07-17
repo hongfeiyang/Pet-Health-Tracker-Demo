@@ -1,23 +1,30 @@
-import '../api/api_service.dart';
-import '../api/api_models.dart';
-import '../models/health_log.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
+import 'package:dio/dio.dart';
+import 'package:built_collection/built_collection.dart';
 
 class HealthRepository {
-  final ApiService _apiService;
+  final HealthApi _healthApi;
 
-  HealthRepository({ApiService? apiService}) 
-      : _apiService = apiService ?? ApiService();
+  HealthRepository({required HealthApi healthApi}) 
+      : _healthApi = healthApi;
 
-  Future<List<HealthLog>> getHealthLogs(String petId) async {
+  Future<List<HealthLogResponse>> getHealthLogs(String petId) async {
     try {
-      final response = await _apiService.getHealthLogs(petId);
-      return response.map(_mapResponseToModel).toList();
+      final response = await _healthApi.getHealthLogsHealthLogPetIdGet(petId: petId);
+      
+      if (response.data != null) {
+        return response.data!.logs.toList();
+      } else {
+        throw Exception('No health logs data received');
+      }
+    } on DioException catch (e) {
+      throw Exception('Failed to fetch health logs: ${e.message}');
     } catch (e) {
       throw Exception('Failed to fetch health logs: ${e.toString()}');
     }
   }
 
-  Future<HealthLog> createHealthLog({
+  Future<HealthLogResponse> createHealthLog({
     required String petId,
     required LogType logType,
     String? value,
@@ -25,30 +32,26 @@ class HealthRepository {
     List<String>? imageUrls,
   }) async {
     try {
-      final request = CreateHealthLogRequest(
-        petId: petId,
-        logType: logType.value,
-        value: value,
-        notes: notes,
-        imageUrls: imageUrls,
+      final healthLogCreate = HealthLogCreate((b) => b
+        ..petId = petId
+        ..logType = logType
+        ..value = value
+        ..notes = notes
+        ..imageUrls = imageUrls != null ? ListBuilder(imageUrls) : null);
+      
+      final response = await _healthApi.createHealthLogHealthLogPost(
+        healthLogCreate: healthLogCreate
       );
-      final response = await _apiService.createHealthLog(request);
-      return _mapResponseToModel(response);
+      
+      if (response.data != null) {
+        return response.data!;
+      } else {
+        throw Exception('Health log creation failed: No data received');
+      }
+    } on DioException catch (e) {
+      throw Exception('Failed to create health log: ${e.message}');
     } catch (e) {
       throw Exception('Failed to create health log: ${e.toString()}');
     }
-  }
-
-  HealthLog _mapResponseToModel(HealthLogResponse response) {
-    return HealthLog(
-      id: response.id,
-      petId: response.petId,
-      logType: LogTypeExtension.fromString(response.logType),
-      value: response.value,
-      notes: response.notes,
-      imageUrls: response.imageUrls,
-      aiAnalysis: response.aiAnalysis,
-      createdAt: response.createdAt,
-    );
   }
 }

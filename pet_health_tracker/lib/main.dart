@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/auth/auth_state.dart';
 import 'blocs/pets/pets_bloc.dart';
@@ -21,14 +22,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider<PetHealthApiClient>(
+          create: (context) => PetHealthApiClient(basePathOverride: 'http://localhost:8000'),
+        ),
         RepositoryProvider<AuthRepository>(
-          create: (context) => AuthRepository(),
+          create: (context) {
+            final apiClient = context.read<PetHealthApiClient>();
+            return AuthRepository(authApi: apiClient.getAuthenticationApi(), apiClient: apiClient);
+          },
         ),
         RepositoryProvider<PetRepository>(
-          create: (context) => PetRepository(),
+          create: (context) {
+            final apiClient = context.read<PetHealthApiClient>();
+            return PetRepository(petsApi: apiClient.getPetsApi());
+          },
         ),
         RepositoryProvider<HealthRepository>(
-          create: (context) => HealthRepository(),
+          create: (context) {
+            final apiClient = context.read<PetHealthApiClient>();
+            return HealthRepository(healthApi: apiClient.getHealthApi());
+          },
         ),
       ],
       child: MultiBlocProvider(

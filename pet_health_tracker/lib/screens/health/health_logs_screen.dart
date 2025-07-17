@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pet_health_api_client/pet_health_api_client.dart' as api;
 import '../../blocs/health/health_bloc.dart';
 import '../../blocs/health/health_event.dart';
 import '../../blocs/health/health_state.dart';
-import '../../models/pet.dart';
-import '../../models/health_log.dart';
 import 'add_health_log_screen.dart';
 
 class HealthLogsScreen extends StatefulWidget {
-  final Pet pet;
+  final api.PetResponse pet;
 
   const HealthLogsScreen({super.key, required this.pet});
 
@@ -128,7 +127,7 @@ class _HealthLogsScreenState extends State<HealthLogsScreen> {
 }
 
 class _HealthLogCard extends StatelessWidget {
-  final HealthLog log;
+  final api.HealthLogResponse log;
 
   const _HealthLogCard({required this.log});
 
@@ -149,7 +148,7 @@ class _HealthLogCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  log.logType.displayName,
+                  _getLogTypeDisplayName(log.logType),
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -245,33 +244,54 @@ class _HealthLogCard extends StatelessWidget {
     );
   }
 
-  IconData _getLogTypeIcon(LogType logType) {
+  String _getLogTypeDisplayName(api.LogType logType) {
     switch (logType) {
-      case LogType.weight:
-        return Icons.monitor_weight;
-      case LogType.temperature:
-        return Icons.thermostat;
-      case LogType.vetVisit:
-        return Icons.local_hospital;
-      case LogType.vaccination:
-        return Icons.vaccines;
-      case LogType.symptom:
-        return Icons.sick;
+      case api.LogType.weight:
+        return 'Weight';
+      case api.LogType.temperature:
+        return 'Temperature';
+      case api.LogType.vetVisit:
+        return 'Vet Visit';
+      case api.LogType.vaccination:
+        return 'Vaccination';
+      case api.LogType.symptom:
+        return 'Symptom';
+      default:
+        return 'Unknown';
     }
   }
 
-  Color _getLogTypeColor(LogType logType) {
+  IconData _getLogTypeIcon(api.LogType logType) {
     switch (logType) {
-      case LogType.weight:
+      case api.LogType.weight:
+        return Icons.monitor_weight;
+      case api.LogType.temperature:
+        return Icons.thermostat;
+      case api.LogType.vetVisit:
+        return Icons.local_hospital;
+      case api.LogType.vaccination:
+        return Icons.vaccines;
+      case api.LogType.symptom:
+        return Icons.sick;
+      default:
+        return Icons.pets;
+    }
+  }
+
+  Color _getLogTypeColor(api.LogType logType) {
+    switch (logType) {
+      case api.LogType.weight:
         return Colors.blue;
-      case LogType.temperature:
+      case api.LogType.temperature:
         return Colors.orange;
-      case LogType.vetVisit:
+      case api.LogType.vetVisit:
         return Colors.green;
-      case LogType.vaccination:
+      case api.LogType.vaccination:
         return Colors.purple;
-      case LogType.symptom:
+      case api.LogType.symptom:
         return Colors.red;
+      default:
+        return Colors.grey;
     }
   }
 

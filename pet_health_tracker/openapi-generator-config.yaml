@@ -1,0 +1,13 @@
+generatorName: dart-dio
+inputSpec: /local/openapi.json
+outputDir: /local/packages/pet_health_api_client
+additionalProperties:
+  pubName: pet_health_api_client
+  pubVersion: 1.0.0
+  nullSafe: true
+  useEnumExtension: true
+  ensureUniqueParams: true
+  allowUnicodeIdentifiers: false
+  prependFormOrBodyParameters: false
+  legacyDiscriminatorBehavior: false
+  disallowAdditionalPropertiesIfNotPresent: false

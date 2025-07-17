@@ -17,7 +17,7 @@
       "program": "lib/main.dart",
       "flutterMode": "profile",
       "console": "debugConsole",
-      "args": ["--enable-asserts"]
+      "args": []
     },
     {
       "name": "Flutter: Release",
@@ -35,7 +35,7 @@
       "flutterMode": "debug",
       "console": "debugConsole",
       "deviceId": "android",
-      "args": ["--enable-asserts"]
+      "args": []
     },
     {
       "name": "Flutter: Debug (iOS)",
@@ -45,7 +45,7 @@
       "flutterMode": "debug",
       "console": "debugConsole",
       "deviceId": "ios",
-      "args": ["--enable-asserts"]
+      "args": []
     },
     {
       "name": "Flutter: Debug (Chrome)",
@@ -55,7 +55,7 @@
       "flutterMode": "debug",
       "console": "debugConsole",
       "deviceId": "chrome",
-      "args": ["--enable-asserts", "--web-renderer=html"]
+      "args": ["--web-renderer=html"]
     },
     {
       "name": "Flutter: Test Debug",
@@ -64,7 +64,7 @@
       "program": "test/widget_test.dart",
       "flutterMode": "debug",
       "console": "debugConsole",
-      "args": ["--enable-asserts"]
+      "args": []
     },
     {
       "name": "Dart: Debug Current File",
@@ -72,7 +72,7 @@
       "request": "launch",
       "program": "${file}",
       "console": "debugConsole",
-      "args": ["--enable-asserts"]
+      "args": []
     },
     {
       "name": "Flutter: Debug with API Mock",
@@ -81,7 +81,7 @@
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "console": "debugConsole",
-      "args": ["--enable-asserts", "--dart-define=USE_MOCK_API=true"]
+      "args": ["--dart-define=USE_MOCK_API=true"]
     },
     {
       "name": "Flutter: Debug with Backend",
@@ -91,7 +91,6 @@
       "flutterMode": "debug",
       "console": "debugConsole",
       "args": [
-        "--enable-asserts",
         "--dart-define=API_BASE_URL=http://localhost:8000",
         "--dart-define=USE_MOCK_API=false"
       ]
@@ -103,7 +102,7 @@
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "console": "debugConsole",
-      "args": ["--enable-asserts", "--hot"]
+      "args": ["--hot"]
     }
   ],
   "compounds": [

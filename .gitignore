@@ -148,3 +148,16 @@ ios/.symlinks/
 
 # SQLite
 *.db
+
+# Generated API client package contents
+/pet_health_tracker/packages/pet_health_api_client/lib/
+/pet_health_tracker/packages/pet_health_api_client/doc/
+/pet_health_tracker/packages/pet_health_api_client/test/
+/pet_health_tracker/packages/pet_health_api_client/.openapi-generator/
+/pet_health_tracker/packages/pet_health_api_client/analysis_options.yaml
+/pet_health_tracker/packages/pet_health_api_client/README.md
+/pet_health_tracker/packages/pet_health_api_client/.travis.yml
+/pet_health_tracker/packages/pet_health_api_client/git_push.sh
+
+# Temporary OpenAPI spec file
+/pet_health_tracker/openapi.json
